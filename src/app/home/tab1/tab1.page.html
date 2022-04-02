@@ -1,0 +1,264 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Inicio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+
+
+
+<ion-content [fullscreen]="true">
+  <ion-item lines="none">
+    <div class="ion-padding-start ion-padding-bottom">
+
+      <ion-row size="12" class="ion-align-items-center">
+        <ion-col size="12">
+          <ion-searchbar #q (keyup.enter)="search(q.value)" placeholder="Busqueda de Producto..." searchIcon="search-outline"></ion-searchbar>
+        </ion-col>
+      </ion-row>
+
+    </div>
+  </ion-item>
+
+  <ion-slides [options]="slideOpts">
+    <ion-slide>
+      <img src="assets\images\screenshot.jpg" class="d-block w-100 slideImg"   alt="...">
+    </ion-slide>
+    <ion-slide>
+      <img src="assets\images\business-series-buy-online-shop-web-template-vector-22248590.jpg"  class="d-block w-100 slideImg" alt="...">
+    </ion-slide>
+    <ion-slide>
+      <img src="assets\images\preview.__large_preview.jpg" class="d-block w-100 slideImg"  alt="...">
+    </ion-slide>
+  </ion-slides>
+
+  <!-- <div class="row">
+    <div id="carouselExampleControls" class="carousel slide  col-md-8 mx-auto" data-bs-ride="carousel">
+      <div class="carousel-inner " >
+        <div class="carousel-item active">
+          <img src="assets\images\screenshot.jpg" class="d-block w-100" style="margin: auto; height:27.33vh; width:auto; max-width: 40vh;"  alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="assets\images\business-series-buy-online-shop-web-template-vector-22248590.jpg" style="margin: auto; height:27.33vh;  max-width: 40vh;" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="assets\images\preview.__large_preview.jpg" class="d-block w-100" style="margin: auto; height:27.33vh;  max-width: 40vh;" alt="...">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div> -->
+
+
+
+  <!-- <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+      <ion-card-title>Card Title</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      Keep close to Nature's heart... and break clear away, once in awhile,
+      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-item>
+      <ion-icon name="pin" slot="start"></ion-icon>
+      <ion-label>ion-item in a card, icon left, button right</ion-label>
+      <ion-button fill="outline" slot="end">View</ion-button>
+    </ion-item>
+
+    <ion-card-content>
+      This is content, without any paragraph or header tags,
+      within an ion-card-content element.
+    </ion-card-content>
+  </ion-card> -->
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col size="12">
+        <ion-slides [options]="categories">
+
+          <ion-slide button *ngFor="let item of categor" (click)="listProductbyCategorie(item.name)">
+            <ion-card class="category" color="danger" [color]="item.color" >
+              <ion-card-header class="ion-text-center" >
+                <!-- <ion-icon src="assets/dish.svg"></ion-icon> -->
+                <ion-card-title >{{item.name}}</ion-card-title>
+                <ion-card-subtitle></ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+    <ion-card-header>
+      <ion-item>
+        <ion-card-title>Oferta de la Semana</ion-card-title>
+      <ion-button (click)="listProductbyTipoBusqueda('ofertaS')" fill="outline" slot="end">Ver</ion-button>
+      </ion-item>
+
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-grid>
+        <ion-slides [options]="ofertaSemana">
+          <ion-slide>
+            <ion-row>
+              <ion-col>
+                <ion-card (click)="detailsProduct('1')" style="min-height: 265px;">
+                  <img src="assets/images/product-icon.png" style="max-width: 100px;"/>
+                  <ion-card-header>
+                    <ion-card-title class="title">LA VALENCIANA ALCAPARADO 8 OZ</ion-card-title>
+                    <ion-card-subtitle>GENERICO</ion-card-subtitle>
+                  </ion-card-header>
+                </ion-card>
+              </ion-col>
+              <ion-col>
+                <ion-card (click)="detailsProduct('1')" style="min-height: 265px;">
+                  <img src="assets/images/product-icon.png" style="max-width: 100px;"/>
+                  <ion-card-header>
+                    <ion-card-title class="title">BARON PHILIPPE DE ROTHSCHILD CHARDONNAY 75CL</ion-card-title>
+                    <ion-card-subtitle>GENERICO</ion-card-subtitle>
+                  </ion-card-header>
+                </ion-card>
+              </ion-col>
+              <!-- <ion-col>
+                <ion-card>
+                  <img src="assets\images\screenshot.jpg" />
+                  <ion-card-header>
+                    <ion-card-title>Madison, WI</ion-card-title>
+                    <ion-card-subtitle>Destination</ion-card-subtitle>
+                  </ion-card-header>
+                </ion-card>
+              </ion-col>
+              <ion-col>
+                <ion-card>
+                  <img src="assets\images\screenshot.jpg" />
+                  <ion-card-header>
+                    <ion-card-title>Madison, WI</ion-card-title>
+                    <ion-card-subtitle>Destination</ion-card-subtitle>
+                  </ion-card-header>
+                </ion-card>
+              </ion-col> -->
+            </ion-row>
+          </ion-slide>
+        </ion-slides>
+
+
+        </ion-grid>
+    </ion-card-content>
+
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="12">
+          <ion-card-header>
+            <ion-item>
+              <ion-card-title>Productos Mas Destacados</ion-card-title>
+            <ion-button (click)="listProductbyTipoBusqueda('destacados')"  fill="outline" slot="end">Ver</ion-button>
+            </ion-item>
+
+          </ion-card-header>
+        </ion-col>
+
+      </ion-row>
+      <ion-row>
+
+        <ion-col size="12">
+          <ion-slides [options]="productNew">
+
+            <ion-slide>
+              <ion-card class="card" style="max-width: 450px;">
+                <ion-card-content class="ion-text-left" >
+
+                  <div class="img-wrapper">
+                    <ion-img src="https://images.pexels.com/photos/109275/pexels-photo-109275.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"></ion-img>
+                  </div>
+
+                  <ion-card-title class="title">Some Awesome Title</ion-card-title>
+                  <ion-card-subtitle>Some description here</ion-card-subtitle>
+                  <ion-card-subtitle>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                  </ion-card-subtitle>
+                </ion-card-content>
+              </ion-card>
+            </ion-slide>
+
+            <ion-slide>
+              <ion-card class="card" style="max-width: 450px;">
+                <ion-card-content class="ion-text-left" >
+
+                  <div class="img-wrapper">
+                    <ion-img src="https://images.pexels.com/photos/616840/pexels-photo-616840.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"></ion-img>
+                  </div>
+
+                  <ion-card-title class="title">Some Awesome Title</ion-card-title>
+                  <ion-card-subtitle>Some description here</ion-card-subtitle>
+                </ion-card-content>
+              </ion-card>
+            </ion-slide>
+
+            <ion-slide>
+              <ion-card class="card" style="max-width: 450px;">
+                <ion-card-content class="ion-text-left">
+
+                  <div class="img-wrapper">
+                    <ion-img src="https://images.pexels.com/photos/1437629/pexels-photo-1437629.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"></ion-img>
+                  </div>
+
+                  <ion-card-title class="title">Some Awesome Title</ion-card-title>
+                  <ion-card-subtitle>Some description here</ion-card-subtitle>
+                </ion-card-content>
+              </ion-card>
+            </ion-slide>
+
+          </ion-slides>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+
+
+        <ion-row  class="wave-container">
+          <ion-col size="12">
+            <ion-button color="warning" shape="round" routerLink="/app/tab1/productlist" class=" ion-align-items-center ion-text-capitalize">
+              Ver listado de Productos
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+
+
+
+
+  </ion-content>
+
+
+
+
+
+
+
+

@@ -1,0 +1,41 @@
+<ion-header  [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button icon="chevron-back" defaultHref="/app/tab1"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{titulo}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchChanged($event)"></ion-searchbar>
+
+  <ion-item>
+    <ion-label>Seleccione El Departamento</ion-label>
+    <ion-select [(ngModel)]="default" (ionChange)="searchChanged($event)"  >
+      <ion-select-option value="">Todos</ion-select-option>
+      <ion-select-option *ngFor="let item of departamento " [value]="item.valor">{{item.nombre}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-list>
+
+    <ion-item button *ngFor="let item of results" (click)="detailsProduct(item.codigo)" >
+      <ion-avatar slot="start">
+        <img [src]="item.url" *ngIf="item.url != 'N/A'">
+      </ion-avatar>
+
+      <ion-label text-wrap>
+        <h3>{{ item.nombre }}</h3>
+        <h4>{{ item.marca }}</h4>
+        <h4>{{ item.unidad }} - RD${{ item.precio }}</h4>
+      </ion-label>
+      <ion-icon slot="end" name="eye-outline"></ion-icon>
+
+
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>
