@@ -1,0 +1,50 @@
+<ion-header  [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button icon="chevron-back" defaultHref="/app/tab2"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Proceder Pago</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="ion-padding">
+
+    <ion-card class="ion-margin-bottom">
+
+      <ion-card-content>
+        <ion-row>
+          <ion-col size="12" class=" ion-margin-bottom">
+            <ion-card-title  >Comprañia: {{descripcion}}</ion-card-title>
+
+            <ion-card-subtitle>Nombre De Cliente: {{descripcion2}}</ion-card-subtitle>
+            <ion-card-subtitle>
+              <span>Importe: RD${{precio}}</span>
+            </ion-card-subtitle>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+
+
+
+    <h6>Tipo De Venta</h6>
+    <ion-item>
+      <ion-label>Seleccionar</ion-label>
+      <ion-select placeholder="Seleccionar Uno" name="tipoVenta" id="tipoVenta"   >
+        <ion-select-option  *ngFor="let item of tipoDeVenta" [value]="item.valor">{{item.nombre}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-checkbox [(ngModel)]="cbxcamion" id="cbxcamion" name="cbxcamion" color="primary"></ion-checkbox>
+      <ion-label>Solicitud De Pago A Camión</ion-label>
+    </ion-item>
+    <ion-button color="success" mode="ios" (click)="processPedido('')" expand="block" shape="round">
+      <ion-icon slot="start" name="bag-check-outline"></ion-icon>
+      Realizar Pedido
+    </ion-button>
+
+  </div>
+</ion-content>
+

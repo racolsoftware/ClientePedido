@@ -1,22 +1,23 @@
 
 
 
-<ion-tabs>
+<ion-tabs >
 
-  <ion-tab-bar slot="bottom">
-<ion-tab-button tab="tab2">
+  <ion-tab-bar slot="bottom" *ngIf="activar === true">
+<ion-tab-button tab="tab2" (click)="handleTabClick($event)">
       <ion-icon name="cart"></ion-icon>
       <ion-label>Carrito</ion-label>
+      <ion-badge color="danger" >100</ion-badge>
     </ion-tab-button>
 
-    <ion-tab-button tab="tab1">
+    <ion-tab-button tab="tab1" (click)="handleTabClick($event)">
       <ion-icon name="home"></ion-icon>
       <ion-label>Inicio</ion-label>
     </ion-tab-button>
 
 
 
-    <ion-tab-button tab="tab3">
+    <ion-tab-button tab="tab3" (click)="handleTabClick($event)">
       <ion-icon name="reorder-four-outline"></ion-icon>
       <ion-label>Ordenes</ion-label>
     </ion-tab-button>

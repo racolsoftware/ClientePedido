@@ -12,6 +12,7 @@ const routes: Routes = [
         component: LoginComponent,
         pathMatch: 'full'
       },
+
 ];
 
 @NgModule({

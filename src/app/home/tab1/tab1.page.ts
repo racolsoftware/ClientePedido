@@ -10,6 +10,17 @@ import { Router } from '@angular/router';
 })
 
 export class Tab1Page {
+  listadoOferta = [];
+
+  listadoOferta2 = [    'COMESTIBLES',
+  'FRUTAS',
+  'DESECHABLES',
+  'ESPECIAS',
+  'FRUTAS SECAS',
+  'HARINAS',
+  'HIGIENE',
+  'ESCOLARES',
+  'QUINCALLERIA'];
   searchQuery ='';
   productNew = {
     centeredSlides: true,
@@ -47,6 +58,27 @@ export class Tab1Page {
 
   constructor(  public router: Router  ) {
       this.initializeApp();
+      this.listadoOferta = this.preprareListToOfert(this.listadoOferta2);
+      console.log(this.preprareListToOfert(this.listadoOferta2));
+  }
+
+  preprareListToOfert(aux: any[]){
+// eslint-disable-next-line prefer-const
+    let listReturn = [];
+    aux.forEach((value, index) => {
+      // eslint-disable-next-line prefer-const
+      let list = [];
+      if(index%2===0){
+        list.push(value);
+        listReturn.push(list);
+      }else{
+        let v = (index/2);
+        // eslint-disable-next-line no-bitwise
+        v= ~~v;
+        listReturn[v].push(value);
+      }
+  });
+  return listReturn;
   }
 
   initializeApp() {
