@@ -5,9 +5,9 @@
 .menu-header-bg{
   height: 180px;
   width: 350px;
-  background: #7590d6;
-  background: linear-gradient(90deg,#7590d6,#4d71d7 100%);
-  box-shadow: 0px 1px 10px rgba(98, 140, 255, 0.5);
+  background: #f0f5c1;
+  background: linear-gradient(90deg,#f1e99f,#d7ce4d 100%);
+  box-shadow: 0px 1px 10px rgba(235, 218, 65, 0.932);
   transform: rotate(-15deg);
   border-radius: 10px 10px 10px 50px;
   margin-left: -18px;
@@ -25,7 +25,7 @@
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    border: 1px solid #5e7ccc;
+    border: 1px solid #f1d21e;
     margin-right: 14px;
   }
 
@@ -34,19 +34,19 @@
     width: 75px;
     height: 75px;
     border-radius: 50%;
-    border: 1px solid #5e7ccc;
+    border: 1px solid #f1d21e;
     margin-right: 14px;
     color: #fff;
   }
 
   h2{
     font-weight: 300;
-    color: #fff;
+    color: rgb(0, 0, 0);
   }
 
   p{
     font-size: 12px;
-    color: #e4e4e4;
+    color: #000000;
     font-weight: 100px;
     letter-spacing: 0.4px;
   }

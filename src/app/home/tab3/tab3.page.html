@@ -1,19 +1,53 @@
+
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button menu="menuP"></ion-menu-button>
     </ion-buttons>
-    <ion-title>Tabs 3</ion-title>
+    <ion-title>Pedidos</ion-title>
   </ion-toolbar>
+
 </ion-header>
 
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content  [scrollEvents]="true"
+(ionScrollStart)="logScrollStart($event)"
+(ionScroll)="logScrolling($event)"
+(ionScrollEnd)="logScrollEnd($event)">
 
+<ion-item >
+
+  <ion-icon slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
+  <label>Filtro</label>
+  <ion-select slot="end" [(ngModel)]="default" placeholder="Fecha" name="filtroFecha" id="filtroFecha">
+    <ion-select-option value="3">Ultimos 3 meses</ion-select-option>
+    <ion-select-option value="6">Ultimos 6 meses</ion-select-option>
+    <ion-select-option value="12">Ultimos 12 meses</ion-select-option>
+  </ion-select>
+</ion-item>
+
+
+  <ion-list>
+
+    <ion-item-sliding button *ngFor="let item of results"   (click)="detailsPedido(item.nombre)">
+      <ion-item slot="top">
+      <ion-avatar slot="start">
+        <ion-icon name="file-tray-full-outline"></ion-icon>
+      </ion-avatar>
+
+      <ion-label text-wrap>
+        <h3>Order #{{ item.nombre }}</h3>
+        <h4>Fecha: {{ item.fecha }}</h4>
+        <h4>Importe: RD${{ item.importe }}</h4>
+        <h4>Estado: {{ item.estado }}</h4>
+
+      </ion-label>
+      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+
+
+    </ion-item-sliding>
+
+  </ion-list>
 
 </ion-content>

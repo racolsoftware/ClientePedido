@@ -28,6 +28,11 @@
 
 
 
+    <h6>Concepto</h6>
+    <ion-item>
+      <ion-textarea placeholder="Escriba algun comentario que desea agregar..."></ion-textarea>
+    </ion-item>
+    <br>
     <h6>Tipo De Venta</h6>
     <ion-item>
       <ion-label>Seleccionar</ion-label>
@@ -36,9 +41,10 @@
       </ion-select>
     </ion-item>
 
+
     <ion-item lines="none">
       <ion-checkbox [(ngModel)]="cbxcamion" id="cbxcamion" name="cbxcamion" color="primary"></ion-checkbox>
-      <ion-label>Solicitud De Pago A Camión</ion-label>
+      <ion-label> Solicitud De Pago A Camión</ion-label>
     </ion-item>
     <ion-button color="success" mode="ios" (click)="processPedido('')" expand="block" shape="round">
       <ion-icon slot="start" name="bag-check-outline"></ion-icon>

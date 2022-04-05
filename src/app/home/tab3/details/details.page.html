@@ -1,0 +1,79 @@
+<ion-header  [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button icon="chevron-back" defaultHref="/app/tab3"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Estado de Pedido</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="ion-padding">
+
+    <ion-card class="ion-margin-bottom">
+
+      <ion-card-content>
+        <ion-row>
+          <ion-col size="12" class=" ion-margin-bottom">
+            <ion-card-title  >Compañia: {{descripcion}}</ion-card-title>
+
+            <ion-card-subtitle>Nombre De Cliente: {{descripcion2}}</ion-card-subtitle>
+            <ion-card-subtitle>Tipo de Venta: {{tipoVenta}}</ion-card-subtitle>
+            <ion-card-subtitle>
+              <span>Importe: RD${{precio}}</span>
+            </ion-card-subtitle>
+
+            <br>
+            <h6>Concepto</h6>
+            <ion-card-subtitle>{{concepto}}</ion-card-subtitle>
+          </ion-col>
+        </ion-row>
+
+      </ion-card-content>
+
+    </ion-card>
+    <ion-item>
+      <ion-label>Estado</ion-label>
+    </ion-item>
+    <div class="container1">
+      <ul class="progressbar">
+        <li [class]="recibido" >Recibido</li>
+        <li [class]="proceso" >Proceso</li>
+        <li [class]="listo">Listo Para Enviar</li>
+      </ul>
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <ion-content>
+    <ion-item>
+      <ion-label>Articulos Pedidos</ion-label>
+    </ion-item>
+
+    <ion-list>
+
+      <ion-item button *ngFor="let item of results"  >
+        <ion-avatar slot="start">
+          <img [src]="item.url" *ngIf="item.url != 'N/A'">
+        </ion-avatar>
+
+        <ion-label text-wrap>
+          <h3>{{ item.nombre }} - {{ item.marca }}</h3>
+          <h4>{{ item.unidad }} - RD${{ item.precio }}</h4>
+          <h4>Cantidad: {{ item.cantidad }}</h4>
+          <h4>Total: RD${{ item.importe }}</h4>
+        </ion-label>
+
+
+      </ion-item>
+
+    </ion-list>
+
+  </ion-content>
+
+
+</ion-content>
+

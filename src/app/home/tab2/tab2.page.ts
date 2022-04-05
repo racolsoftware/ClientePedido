@@ -18,7 +18,7 @@ export class Tab2Page {
   results = [
 
     {url:'assets/images/box.png',
-  nombre:'SAZON RANCHERO C/AZAFRAN SOBRE 12/1 24 UDES',
+  nombre:'1SAZON RANCHERO C/AZAFRAN SOBRE 12/1 24 UDES',
   marca:'BALDOM',
   precio : '500.00',
   unidad : 'Caja',
