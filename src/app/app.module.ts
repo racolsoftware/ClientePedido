@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { DataService } from './services/data.service';
 import { DetailsPage } from './home/tab1/details/details.pages';
 
+
 @NgModule({
   declarations: [AppComponent,LoginComponent],
   entryComponents: [],

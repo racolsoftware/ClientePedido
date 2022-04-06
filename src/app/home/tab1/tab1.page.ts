@@ -11,6 +11,10 @@ import { Router } from '@angular/router';
 
 export class Tab1Page {
   listadoOferta = [];
+  catag = ['assets/images/screenshot.jpg',
+  'assets/images/business-series-buy-online-shop-web-template-vector-22248590.jpg',
+  'assets/images/preview.__large_preview.jpg',
+];
 
   listadoOferta2 = [    'COMESTIBLES',
   'FRUTAS',
@@ -21,6 +25,8 @@ export class Tab1Page {
   'HIGIENE',
   'ESCOLARES',
   'QUINCALLERIA'];
+
+  activoCatalog = true;
   searchQuery ='';
   productNew = {
     centeredSlides: true,
@@ -117,6 +123,8 @@ export class Tab1Page {
 
   listProductbyTipoBusqueda(aux: string){
     this.router.navigate(['/app/tab1/productlist'], { queryParams: { tipo: aux } });
+  }
+  handleSearch(){
   }
 
 }

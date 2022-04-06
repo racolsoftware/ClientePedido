@@ -83,7 +83,7 @@ export class LoginComponent implements OnInit  {
 
         this.sqlservices.usuarioSetToken(data.objeto.VALOR);
         // localStorage.setItem('Data', JSON.stringify([{'ty':data.objeto.TY, 'valor':data.objeto.VALOR}]));
-        this.router.navigateByUrl('/app');
+        this.router.navigateByUrl('/app/tab1');
       }
     });
   }

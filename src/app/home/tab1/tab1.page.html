@@ -19,22 +19,16 @@
 
       <ion-row size="12" class="ion-align-items-center">
         <ion-col size="12">
-          <ion-searchbar #q (keyup.enter)="search(q.value)" placeholder="Busqueda de Producto..." searchIcon="search-outline"></ion-searchbar>
+          <ion-searchbar (keyup.enter)="handleSearch()" #q (keyup.enter)="search(q.value)" placeholder="Busqueda de Producto..." searchIcon="search-outline"></ion-searchbar>
         </ion-col>
       </ion-row>
 
     </div>
   </ion-item>
 
-  <ion-slides [options]="slideOpts">
-    <ion-slide>
-      <img src="assets\images\screenshot.jpg" class="d-block w-100 slideImg"   alt="...">
-    </ion-slide>
-    <ion-slide>
-      <img src="assets\images\business-series-buy-online-shop-web-template-vector-22248590.jpg"  class="d-block w-100 slideImg" alt="...">
-    </ion-slide>
-    <ion-slide>
-      <img src="assets\images\preview.__large_preview.jpg" class="d-block w-100 slideImg"  alt="...">
+  <ion-slides [options]="slideOpts" *ngIf="activoCatalog">
+    <ion-slide *ngFor="let item of catag" >
+      <img [src]="item" class="d-block w-100 slideImg"   alt="...">
     </ion-slide>
   </ion-slides>
 
