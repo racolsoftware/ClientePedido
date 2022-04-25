@@ -7,8 +7,9 @@ import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@a
 import { Observable } from 'rxjs';
 import { SessionValue } from '../models/sessionValue.models';
 
-export const server = 'http://pagos.racolcomputers.com/data/php/';
-// export const server = 'http://serverracol.ddns.net:8080/PagoRacol/data/php/'
+// export const server = 'http://pagos.racolcomputers.com/data/php/';
+export const server = 'http://serverracol.ddns.net:8080/RacolClienteSupPedido/data/php/';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,11 +18,20 @@ export const server = 'http://pagos.racolcomputers.com/data/php/';
  */
 
 export class DataService {
+  public static  suplidorServer = '';
+  public static  token = '';
 
 
 
   constructor(private http: HttpClient, private router: Router, private titleService: Title ) {
 
+  }
+
+  setSuplidorServer(aux: string){
+    DataService.suplidorServer = aux;
+  }
+  setToken(aux: string){
+    DataService.token = aux;
   }
 
   setTituloPagina(descripcion: string) {
@@ -121,6 +131,172 @@ export class DataService {
     format = format.replace('DD', day.toString().padStart(2,'0'));
 
     return format;
+  }
+
+
+  getDepartamentosMenu(): Observable<any> {
+    const valor: any = localStorage.getItem('Jdata');
+    const data: any = JSON.parse(valor);
+    DataService.suplidorServer = data.url;
+    const serverName = DataService.suplidorServer + 'Consultas/getDepartamentosMenu.php';
+    return this.http.get(serverName);
+  }
+
+  getTodosDepartamentos(): Observable<any> {
+    const valor: any = localStorage.getItem('Jdata');
+    const data: any = JSON.parse(valor);
+    DataService.suplidorServer = data.url;
+    const serverName = DataService.suplidorServer + 'Consultas/getTodosDepartamentos.php';
+    console.log(serverName);
+    return this.http.get(serverName);
+  }
+
+  getMainDepartamentos(): Observable<any> {
+    const valor: any = localStorage.getItem('Jdata');
+    const data: any = JSON.parse(valor);
+    DataService.suplidorServer = data.url;
+    const serverName = DataService.suplidorServer + 'Consultas/getMainDepartamentos.php';
+    return this.http.get(serverName);
+  }
+
+  getMainDepartamentosConfig(): Observable<any> {
+    const valor: any = localStorage.getItem('Jdata');
+    const data: any = JSON.parse(valor);
+    DataService.suplidorServer = data.url;
+    const serverName = DataService.suplidorServer + 'Consultas/getMainDepartamentosConfig.php';
+    return this.http.get(serverName);
+  }
+
+  getMainDepartamentosPresentar(): Observable<any> {
+    const valor: any = localStorage.getItem('Jdata');
+    const data: any = JSON.parse(valor);
+    DataService.suplidorServer = data.url;
+    const serverName = DataService.suplidorServer + 'Consultas/getMainDepartamentosPresentar.php';
+    return this.http.get(serverName);
+  }
+
+  getMainDepartamentosPresentarConfig(): Observable<any> {
+    const valor: any = localStorage.getItem('Jdata');
+    const data: any = JSON.parse(valor);
+    DataService.suplidorServer = data.url;
+    const serverName = DataService.suplidorServer + 'Consultas/getMainDepartamentosPresentarConfig.php';
+    return this.http.get(serverName);
+  }
+
+  getItemDepartamento(codigo: string, ordenar: string): Observable<any> {
+    const valor: any = localStorage.getItem('Jdata');
+    const data: any = JSON.parse(valor);
+    DataService.suplidorServer = data.url;
+    const serverName = DataService.suplidorServer + 'Consultas/getItemsDepartamento.php';
+    return this.http.post(serverName, { id : codigo, orden : ordenar });
+  }
+  getItemDepartamentoRango(codigo: string, valor1: number, valor2: number, ordenar: number): Observable<any> {
+    const valor: any = localStorage.getItem('Jdata');
+    const data: any = JSON.parse(valor);
+    DataService.suplidorServer = data.url;
+    const serverName = DataService.suplidorServer + 'Consultas/getItemsDepartamentoRango.php';
+    return this.http.post(serverName, { id : codigo, val1 : valor1, val2: valor2, orden : ordenar });
+  }
+  getConfigDepartamento(codigo: string): Observable<any> {
+    const valor: any = localStorage.getItem('Jdata');
+    const data: any = JSON.parse(valor);
+    DataService.suplidorServer = data.url;
+    const serverName = DataService.suplidorServer + 'Consultas/getConfigDepartamento.php';
+    return this.http.post(serverName, { id : codigo });
+  }
+
+  getConfigBusqueda(codigo: string): Observable<any> {
+    const valor: any = localStorage.getItem('Jdata');
+    const data: any = JSON.parse(valor);
+    DataService.suplidorServer = data.url;
+    const serverName = DataService.suplidorServer + 'Consultas/getConfigBusqueda.php';
+    return this.http.post(serverName, { id : codigo });
+  }
+
+  getConfigNoImagen(): Observable<any> {
+    const valor: any = localStorage.getItem('Jdata');
+    const data: any = JSON.parse(valor);
+    DataService.suplidorServer = data.url;
+    const serverName = DataService.suplidorServer + 'Consultas/getConfigNoImagen.php';
+    return this.http.post(serverName, { });
+  }//getConfigNoImagen
+
+  getItemBusquedaRango(codigo: string, valor1: number, valor2: number, ordenar: number): Observable<any> {
+    const valor: any = localStorage.getItem('Jdata');
+    const data: any = JSON.parse(valor);
+    DataService.suplidorServer = data.url;
+    const serverName = DataService.suplidorServer + 'Consultas/getItemsBusquedaRango.php';
+    return this.http.post(serverName, { id : codigo, val1 : valor1, val2: valor2, orden : ordenar });
+  }
+
+  getItemBusquedaRangoNoImagen( valor1: number, valor2: number, ordenar: number): Observable<any> {
+    const valor: any = localStorage.getItem('Jdata');
+    const data: any = JSON.parse(valor);
+    DataService.suplidorServer = data.url;
+    const serverName = DataService.suplidorServer + 'Consultas/getItemsNoImagenRango.php';
+    return this.http.post(serverName, { val1 : valor1, val2: valor2, orden : ordenar });
+  }
+
+  getArticuloData(codigoArt: string, unidadArt: number): Observable<any> {
+    const valor: any = localStorage.getItem('Jdata');
+    const data: any = JSON.parse(valor);
+    DataService.suplidorServer = data.url;
+    const serverName = DataService.suplidorServer + 'Consultas/getItemData.php';
+    return this.http.post(serverName, { id : codigoArt, unidad : unidadArt });
+  }
+  getArticuloDescripcion(codigoArt: string, unidadArt: number): Observable<any> {
+    const valor: any = localStorage.getItem('Jdata');
+    const data: any = JSON.parse(valor);
+    DataService.suplidorServer = data.url;
+    const serverName = DataService.suplidorServer + 'Consultas/getItemDescripcion.php';
+    return this.http.post(serverName, { id : codigoArt, unidad : unidadArt });
+  }
+  getArticuloRelacionados(codigoArt: string): Observable<any> {
+    const valor: any = localStorage.getItem('Jdata');
+    const data: any = JSON.parse(valor);
+    DataService.suplidorServer = data.url;
+    const serverName = DataService.suplidorServer + 'Consultas/getItemsRelacionadosArticulos.php';
+    return this.http.post(serverName, { id : codigoArt });
+  }
+
+  getCarritoItems(varCodigos: string): Observable<any>{
+    const valor: any = localStorage.getItem('Jdata');
+    const data: any = JSON.parse(valor);
+    DataService.suplidorServer = data.url;
+    const serverName = DataService.suplidorServer + 'Consultas/getCarritoItems.php';
+    return this.http.post(serverName, { codigos : varCodigos });
+  }
+
+  getBuscandoItems(varBuscando: string): Observable<any> {
+    const valor: any = localStorage.getItem('Jdata');
+    const data: any = JSON.parse(valor);
+    DataService.suplidorServer = data.url;
+    const serverName = DataService.suplidorServer + 'Consultas/getBusqueda.php';
+    return this.http.post(serverName, { busqueda : varBuscando });
+  }
+
+  getMainItemsDepartamentos(codigoDep: string): Observable<any> {
+    const valor: any = localStorage.getItem('Jdata');
+    const data: any = JSON.parse(valor);
+    DataService.suplidorServer = data.url;
+    const serverName = DataService.suplidorServer + 'Consultas/getMainItemsDepartamentos.php';
+    return this.http.post(serverName, { id : codigoDep });
+  }
+
+  getMainItemsNuevos(): Observable<any> {
+    const valor: any = localStorage.getItem('Jdata');
+    const data: any = JSON.parse(valor);
+    DataService.suplidorServer = data.url;
+    const serverName = DataService.suplidorServer + 'Consultas/getMainItemsNuevos.php';
+    return this.http.post(serverName, {});
+  }
+
+  getMainItemsMasVendidos(): Observable<any> {
+    const valor: any = localStorage.getItem('Jdata');
+    const data: any = JSON.parse(valor);
+    DataService.suplidorServer = data.url;
+    const serverName = DataService.suplidorServer + 'Consultas/getMainItemsMasVendidos.php';
+    return this.http.post(serverName, {});
   }
 
   GetHeader(ty: string, value: string){

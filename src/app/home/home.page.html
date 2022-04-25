@@ -36,19 +36,19 @@
     <ion-menu contentId="main-content" side="start"  menuId="menuP" type="overlay">
       <ion-content>
 
-        <div class="menu-header-bg">Menu</div>
+        <div class="menu-header-bg"></div>
         <div class="header-content">
           <ion-icon name="person-outline"></ion-icon>
           <ion-label>
-            <h2>User</h2>
-            <p>desarrollo</p>
+            <h2>{{usuario}}</h2>
+            <p>{{compania}}</p>
           </ion-label>
         </div>
         <ion-list id="inbox-list">
 
           <ion-menu-toggle auto-hide="false">
             <ion-item routerDirection="root" [routerLink]="'/app/tab1'" lines="none" detail="false" routerLinkActive="selected">
-              <ion-icon name="globe-outline"></ion-icon>
+              <ion-icon slot="start" name="globe-outline"></ion-icon>
               <ion-label>Inbox</ion-label>
             </ion-item>
           </ion-menu-toggle>
@@ -60,14 +60,20 @@
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
+
         </ion-list>
 
         <ion-list id="labels-list">
-          <ion-list-header>Labels</ion-list-header>
+          <ion-list-header>Configuracion</ion-list-header>
 
-          <ion-item *ngFor="let label of labels" lines="none">
-            <ion-icon slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
-            <ion-label>{{ label }}</ion-label>
+          <ion-item routerDirection="root" slot="bottom" [routerLink]="'/app/tab1'" lines="none" detail="false" routerLinkActive="selected">
+            <ion-icon slot="start" name="person-outline"></ion-icon>
+            <ion-label>Perfil</ion-label>
+          </ion-item>
+
+          <ion-item routerDirection="root" slot="bottom" [routerLink]="'/app/tab1'" lines="none" detail="false" routerLinkActive="selected">
+            <ion-icon slot="start" name="exit-outline"></ion-icon>
+            <ion-label>Salir</ion-label>
           </ion-item>
         </ion-list>
 

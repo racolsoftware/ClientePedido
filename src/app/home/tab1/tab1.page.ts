@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { IonInfiniteScroll, IonSlides, LoadingController } from '@ionic/angular';
+import { DataService } from 'src/app/services/data.service';
+import { StartPage } from './start/start.page';
 
 
 
@@ -9,7 +12,12 @@ import { Router } from '@angular/router';
   styleUrls: ['tab1.page.scss']
 })
 
-export class Tab1Page {
+export class Tab1Page implements AfterViewInit {
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+
+  cantidadoFERTA=1;
+
+
   listadoOferta = [];
   catag = ['assets/images/screenshot.jpg',
   'assets/images/business-series-buy-online-shop-web-template-vector-22248590.jpg',
@@ -24,7 +32,7 @@ export class Tab1Page {
   'HARINAS',
   'HIGIENE',
   'ESCOLARES',
-  'QUINCALLERIA'];
+'QUINCALLERIA'];
 
   activoCatalog = true;
   searchQuery ='';
@@ -46,26 +54,43 @@ export class Tab1Page {
     }
   };
   categor = [];
-  listadoCate = [
-    'COMESTIBLES',
-  'FRUTAS',
-  'DESECHABLES',
-  'ESPECIAS',
-  'FRUTAS SECAS',
-  'HARINAS',
-  'HIGIENE',
-  'ESCOLARES',
-  'QUINCALLERIA'];
-  ofertaSemana = {
-    initialSlide: 0
+  listadoCate = [];
+  oferta = {
+    initialSlide: 0,
+    slidesPerView: 1.1
   };
   colorList = ['danger','primary','warning','success','tertiary','secondary'];
 
 
-  constructor(  public router: Router  ) {
-      this.initializeApp();
+
+  constructor(  public router: Router, public loadingController: LoadingController, public sqlservices: DataService   ) {
+      // this.initializeApp();
       this.listadoOferta = this.preprareListToOfert(this.listadoOferta2);
-      console.log(this.preprareListToOfert(this.listadoOferta2));
+
+  }
+  ngAfterViewInit(): void {
+    this.getDepartamento();
+  }
+
+  getDepartamento(){
+    const Valor: any = (localStorage.getItem('values'));
+    const  Data = JSON.parse(Valor);
+
+    this.sqlservices.getDepartamentosMenu().subscribe( (Data: any)=>{
+            console.log(Data);
+
+      // if(Data.resultado === 1){
+        this.listadoCate = Data;
+        this.listadoCategoria(Data);
+        console.log(this.categor);
+        localStorage.setItem('listadoDepartamento',JSON.stringify(Data));
+
+
+
+      // } else {
+
+      // }
+    });
   }
 
   preprareListToOfert(aux: any[]){
@@ -74,10 +99,11 @@ export class Tab1Page {
     aux.forEach((value, index) => {
       // eslint-disable-next-line prefer-const
       let list = [];
-      if(index%2===0){
+
+      if(index%2===0 && index < aux.length-aux.length%2){
         list.push(value);
         listReturn.push(list);
-      }else{
+      }else if(index <aux.length-aux.length%2){
         let v = (index/2);
         // eslint-disable-next-line no-bitwise
         v= ~~v;
@@ -87,12 +113,25 @@ export class Tab1Page {
   return listReturn;
   }
 
+
+  listadoCategoria(list: any): void{
+    let cant = 0;
+
+    list.forEach(aux => {
+      const ele = {
+        name:aux,
+        color:this.colorList[cant%=6]
+      };
+      cant++;
+      this.categor.push(ele);
+    });
+
+  }
   initializeApp() {
 
     let cant = 0;
 
     this.listadoCate.forEach(aux => {
-      console.log(aux);
       const ele = {
         name:aux,
         color:this.colorList[cant%=6]
@@ -104,12 +143,59 @@ export class Tab1Page {
 
 
 
-
-
-
   }
+  loadDataOferta(event) {
+    this.presentLoading();
+    setTimeout(async () => {
+      // for (let index = 0; index < 8; index++) {
+
+
+      // }
+      this.preprareListToOfert(this.listadoOferta2).forEach(element => {
+        this.listadoOferta.push(
+          element
+        );
+      });
+      console.log('Done');
+
+
+      // App logic to determine if all data is loaded
+      // and disable the infinite scroll
+      if (this.listadoOferta.length === 1000) {
+        event.target.disabled = true;
+      }
+    }, 500);
+  }
+
+  toggleInfiniteScroll() {
+    this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
+  }
+
   search(q: string) {
     console.log(q);
+}
+
+async presentLoading() {
+  const loading = await this.loadingController.create({
+    message: 'Cargando',
+    duration: 2000
+  });
+  await loading.present();
+
+  const { role, data } = await loading.onDidDismiss();
+
+  console.log('Loading dismissed!');
+}
+
+async presentLoadingWithOptions() {
+  const loading = await this.loadingController.create({
+    spinner: null,
+    duration: 5000,
+    message: 'Please wait...',
+    translucent: true,
+    cssClass: 'custom-class custom-loading'
+  });
+  return await loading.present();
 }
   navegar(){
     this.router.navigateByUrl('/app/tab2');

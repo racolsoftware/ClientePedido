@@ -19,12 +19,14 @@
 
       <ion-row size="12" class="ion-align-items-center">
         <ion-col size="12">
-          <ion-searchbar (keyup.enter)="handleSearch()" #q (keyup.enter)="search(q.value)" placeholder="Busqueda de Producto..." searchIcon="search-outline"></ion-searchbar>
+          <ion-searchbar routerLink="/app/tab1/productlist" (keyup.enter)="handleSearch()" #q (keyup.enter)="search(q.value)" placeholder="Busqueda de Producto..." searchIcon="search-outline"></ion-searchbar>
         </ion-col>
       </ion-row>
 
     </div>
   </ion-item>
+
+
 
   <ion-slides [options]="slideOpts" *ngIf="activoCatalog">
     <ion-slide *ngFor="let item of catag" >
@@ -87,14 +89,16 @@
       <ion-col size="12">
         <ion-slides [options]="categories">
 
-          <ion-slide button *ngFor="let item of categor" (click)="listProductbyCategorie(item.name)">
+          <ion-slide button *ngFor="let item of categor" (click)="listProductbyCategorie(item.name.codigo_dep)">
             <ion-card  class="category" color="danger" [color]="item.color" >
               <ion-card-header style="min-height: 32px;" class="ion-text-center" >
                 <!-- <ion-icon src="assets/dish.svg"></ion-icon> -->
-                <ion-card-title style="text-align: center; margin-top: 8px; " >{{item.name}}</ion-card-title>
+
+                <ion-card-title style="text-align: center; margin-top: 8px; " >{{item.name.descrip_dep}}</ion-card-title>
               </ion-card-header>
             </ion-card>
           </ion-slide>
+
         </ion-slides>
       </ion-col>
     </ion-row>
@@ -112,7 +116,7 @@
 
     <ion-card-content>
       <ion-grid>
-        <ion-slides [options]="ofertaSemana">
+        <ion-slides [options]="oferta"  (ionSlideReachEnd)="loadDataOferta($event)">
 
 
           <ion-slide *ngFor="let item of listadoOferta" >
@@ -145,11 +149,14 @@
 
 
 
+
         </ion-slides>
 
 
         </ion-grid>
     </ion-card-content>
+
+
 
     <ion-grid class="ion-no-padding">
       <ion-row>
@@ -216,6 +223,58 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+
+
+    <ion-card-header>
+      <ion-item>
+        <ion-card-title>Producto Nuevos</ion-card-title>
+      <ion-button (click)="listProductbyTipoBusqueda('ofertaS')" fill="outline" slot="end">Ver</ion-button>
+      </ion-item>
+
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-grid>
+        <ion-slides [options]="oferta"  (ionSlideReachEnd)="loadDataOferta($event)">
+
+
+          <ion-slide *ngFor="let item of listadoOferta" >
+            <ion-row >
+              <ion-col *ngFor="let aux of item">
+                <ion-card class="cardOfert">
+
+                  <ion-card-header (click)="detailsProduct('1')" >
+                    <img src="assets/images/product-icon.png" style="max-width: 100px;"/>
+                    <ion-card-title class="title">LA VALENCIANA ALCAPARADO 8 OZ</ion-card-title>
+                    <ion-card-subtitle style="margin-top: 0px;" class="noMarginTop" >GENERICO</ion-card-subtitle>
+                  </ion-card-header>
+                  <ion-card-content style="padding: 8px;">
+                    <ion-toolbar>
+                      <div  slot="start">
+                        <ion-card-subtitle class="noMarginTop"  style="text-align: left;" >Caja</ion-card-subtitle>
+                        <ion-card-subtitle class="noMarginTop"  style="text-align: left;"  >RD$500</ion-card-subtitle>
+                      </div >
+                      <ion-button slot="end" style="width: 42px;" color="warning">
+                        +
+                      </ion-button>
+
+                    </ion-toolbar>
+                  </ion-card-content>
+                </ion-card>
+              </ion-col>
+
+            </ion-row>
+          </ion-slide>
+
+
+
+
+        </ion-slides>
+
+
+        </ion-grid>
+    </ion-card-content>
+
 
 
 
